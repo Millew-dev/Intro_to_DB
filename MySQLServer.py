@@ -6,21 +6,18 @@ try:
     connection = mysql.connector.connect(
         host='localhost',
         user='root',
-        password='your_mysql_password'  # Replace with your real password
+        password='your_mysql_password'  # Replace this with your actual password
     )
 
     if connection.is_connected():
         cursor = connection.cursor()
-
-        # Create the database (this won't throw error if it already exists)
         cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
         print("Database 'alx_book_store' created successfully!")
 
-except Error as e:
-    print(f"Error connecting to MySQL: {e}")
+except mysql.connector.Error as err:
+    print(f"Error connecting to MySQL: {err}")
 
 finally:
-    # Close connection
     if 'cursor' in locals():
         cursor.close()
     if 'connection' in locals() and connection.is_connected():
